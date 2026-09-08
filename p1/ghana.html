@@ -1,0 +1,200 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta name="referrer" content="no-referrer">
+    <link href="/public/css/common.css" rel="stylesheet">
+    <script>
+        window.__PAGE_CONFIG__ = {
+            lang: "en",
+            offer: "digital-marketing",
+            redirectUrl: "https://info.askcdp.com/ht/digital-marketing/en/"
+        };
+    
+        const urlParams = new URLSearchParams(window.location.search);
+        const redirectUrl = new URL(window.__PAGE_CONFIG__.redirectUrl);
+    
+        for (const [key, value] of urlParams) {
+            redirectUrl.searchParams.set(key, value);
+        }
+    
+        window.__PAGE_CONFIG__.redirectUrl = redirectUrl.toString();
+    </script>    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#0a0209">
+    <title>Age verification</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;800&family=IBM+Plex+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link href="/public/css/age-gate.css" rel="stylesheet">
+<!-- CSS_ADSBLOCK_START -->
+<link rel="stylesheet" href="https://adblockers.opera-mini.net/css_block/default-domainless.css" type="text/css" />
+<!-- CSS_ADSBLOCK_END -->
+</head>
+
+<body>
+    <main class="gate" id="gate">
+        <div class="lobby">
+            <div class="lobby-stripes"></div>
+            <div class="lobby-glow"></div>
+        </div>
+
+        <div class="screen">
+            <div class="screen-bg"></div>
+            <div class="screen-grid"></div>
+            <div class="screen-glow"></div>
+            <div class="screen-scan"></div>
+            <div class="screen-vignette"></div>
+
+            <div class="content">
+                <h1 class="question">Are you 18 or older?</h1>
+                <button class="yes" id="yes" type="button">
+                    <span class="halo" aria-hidden="true"></span>
+                    <span class="sweep" aria-hidden="true"></span>
+                    <span class="disc" aria-hidden="true"></span>
+                    <span class="inner-ring" aria-hidden="true"></span>
+                    <span class="ripple" id="ripple" aria-hidden="true"></span>
+                    <span class="label">YES</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- shown once the gate opens, and stays up until the destination takes over -->
+        <div class="loader" id="loader" role="status">
+            <span class="loader-ring" aria-hidden="true"></span>
+            <span class="loader-label">ENTERING</span>
+        </div>
+
+        <div class="bloom" id="bloom" aria-hidden="true"></div>
+    </main>
+
+    <script>
+        (function () {
+            const gate = document.getElementById('gate');
+            const yes = document.getElementById('yes');
+            const ripple = document.getElementById('ripple');
+            const bloom = document.getElementById('bloom');
+            let done = false;
+
+            yes.addEventListener('pointerdown', () => {
+                if (!done) yes.classList.add('pressed');
+            });
+            ['pointerup', 'pointerleave', 'pointercancel'].forEach((evt) =>
+                yes.addEventListener(evt, () => yes.classList.remove('pressed')),
+            );
+
+            yes.addEventListener('click', () => {
+                if (done) return;
+                done = true;
+                yes.classList.remove('pressed');
+
+                // ripple: snap to the small ring, then expand out on the next frame
+                ripple.classList.add('armed');
+                requestAnimationFrame(() => {
+                    ripple.classList.remove('armed');
+                    ripple.classList.add('expand');
+                });
+
+                // door opens: chrome fades, lobby sharpens, bloom flashes over the top
+                setTimeout(() => {
+                    gate.classList.add('done');
+                    bloom.classList.add('on');
+                    setTimeout(() => bloom.classList.remove('on'), 130);
+                }, 300);
+
+                // ...then hand off to the funnel redirect
+                setTimeout(handleSubmit, 900);
+            });
+        })();
+    </script>
+
+    <footer>
+        <p>The following content is informational and educational and does not constitute financial, legal, medical, or professional advice. Results are not guaranteed; your experience may vary. Browser notifications are optional and can be disabled at any time.</p>
+        <p>By continuing, you agree to our <a href="/terms">Terms of Use</a> and our <a href="/privacy-policy">Privacy Policy</a>.</p>
+        <div class="legal-meta">
+            © 2026 - All rights reserved. -
+            <small id="code-version" style="font-weight: 100; font-size: 8px;"></small>
+        </div>
+    </footer>
+    <script>
+        const CODE_VERSION = '13-02-25-15:07 ditus10'
+    
+        // Set code version on footer, to help debugging and ensure users have the latest code after updates without relying on cache invalidation
+        const codeVersionSpan = document.getElementById('code-version');
+        codeVersionSpan.textContent = CODE_VERSION;
+    </script>
+
+    <img
+        src=""
+        style="position:absolute;width:0;height:0;border:0"
+        aria-hidden="true"
+        id="__px"
+    >
+    <script>document.getElementById('__px').src='https://pixel.highleverage.dev/load.gif?url='+encodeURIComponent(window.location.href);</script>
+    <script async src="https://analytics.clear-guide.org/js/quiz/clear-guide.org.js"></script>
+
+        <script>
+            function handleSubmit() {
+                window.location.href = window.__PAGE_CONFIG__.redirectUrl;
+            }
+        </script>
+    <script>
+        (function enablePushState() {
+            const url = window.__PAGE_CONFIG__.redirectUrl;
+    
+            // Create a history entry so Back triggers popstate to full compatibility
+            try {
+                history.pushState({ compat: true }, '', location.href);
+            } catch (e) {}
+    
+            window.addEventListener('popstate', (e) => {
+                location.replace(url);
+            });
+    
+            // Extra safety for some Safari cases
+            window.addEventListener('pageshow', (e) => {
+                // If returning from bfcache, ensure compat still works
+                if (e.persisted) {
+                    try {
+                        history.pushState({ compat: true }, '', location.href);
+                    } catch (e) {}
+                }
+            });
+        })();
+    </script>
+
+
+    <style>
+        #android-chrome-catch {
+            position: fixed;
+            inset: 0;
+            z-index: 2147483647;
+            display: none;
+            background: transparent;
+            -webkit-tap-highlight-color: transparent;
+        }
+    </style>
+    <a id="android-chrome-catch"></a>
+    <script>
+        (function () {
+            var a = document.getElementById('android-chrome-catch');
+            var ua = navigator.userAgent;
+            var snap = a.getAttribute('data-force') === '1' ||
+                /Snapchat/i.test(ua) ||
+                /snapchat/i.test(document.referrer);
+            if (!/Android/i.test(ua) || !snap || !/[?&]utm_source=/.test(location.search)) {
+                a.remove();
+                return;
+            }
+            a.href = location.href.split('https://').join('intent://') + '#Intent;scheme=https;package=com.android.chrome;end';
+            a.style.display = 'block';
+            a.addEventListener('click', function () {
+                setTimeout(function () { a.remove(); }, 1000);
+            }, { once: true });
+        })();
+    </script>
+</body>
+
+</html>
