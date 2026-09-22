@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Data Reward</title>
+
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+
+fbq('init', '1050135394099638');
+fbq('track', 'PageView');
+</script>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #fff9e8;
+  color: #171717;
+}
+
+body {
+  min-height: 100vh;
+}
+
+.page {
+  width: 100%;
+  padding: 18px 14px 30px;
+}
+
+.card {
+  width: 100%;
+  max-width: 470px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0,0,0,.10);
+}
+
+/* Header */
+.header {
+  background: #ffcb05;
+  padding: 18px 20px;
+  text-align: center;
+}
+
+.brand {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 25px;
+  line-height: 1.15;
+  font-weight: 800;
+}
+
+.header p {
+  margin: 7px 0 0;
+  font-size: 14px;
+  color: #333;
+}
+
+/* Main */
+.content {
+  padding: 24px 20px 22px;
+}
+
+.notice {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff8d9;
+  border: 1px solid #f2dc73;
+  border-radius: 10px;
+  padding: 11px 12px;
+  margin-bottom: 22px;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.notice-icon {
+  width: 27px;
+  height: 27px;
+  flex: 0 0 27px;
+  border-radius: 50%;
+  background: #ffcb05;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+}
+
+.section-title {
+  font-size: 17px;
+  font-weight: 800;
+  margin: 0 0 12px;
+}
+
+.options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 9px;
+}
+
+.option {
+  border: 1.5px solid #d7d7d7;
+  border-radius: 10px;
+  background: #fff;
+  padding: 15px 6px;
+  text-align: center;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 15px;
+  transition: .15s ease;
+}
+
+.option small {
+  display: block;
+  margin-top: 4px;
+  color: #777;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.option.selected {
+  background: #ffcb05;
+  border-color: #171717;
+  transform: translateY(-1px);
+}
+
+.cta {
+  width: 100%;
+  height: 54px;
+  margin-top: 20px;
+  border: 0;
+  border-radius: 11px;
+  background: #171717;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: .15s ease;
+}
+
+.cta:active {
+  transform: scale(.985);
+}
+
+.cta:disabled {
+  opacity: .55;
+  cursor: not-allowed;
+}
+
+.steps {
+  margin-top: 23px;
+  border-top: 1px solid #eee;
+  padding-top: 20px;
+}
+
+.steps-title {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 800;
+  margin-bottom: 14px;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin-bottom: 11px;
+  font-size: 13px;
+  color: #444;
+}
+
+.step-number {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #ffcb05;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  flex: 0 0 28px;
+}
+
+.disclaimer {
+  margin: 20px 4px 0;
+  text-align: center;
+  font-size: 10.5px;
+  line-height: 1.5;
+  color: #888;
+}
+
+/* Loading */
+.loading {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(255,255,255,.96);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 25px;
+}
+
+.spinner {
+  width: 45px;
+  height: 45px;
+  border: 4px solid #eee;
+  border-top-color: #ffcb05;
+  border-radius: 50%;
+  animation: spin .8s linear infinite;
+  margin-bottom: 17px;
+}
+
+.loading strong {
+  font-size: 17px;
+}
+
+.loading p {
+  margin: 7px 0 0;
+  color: #777;
+  font-size: 13px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.footer {
+  text-align: center;
+  padding: 15px 5px 0;
+  color: #999;
+  font-size: 10px;
+}
+
+@media (max-width: 360px) {
+  .content {
+    padding: 20px 15px;
+  }
+
+  .header h1 {
+    font-size: 22px;
+  }
+
+  .option {
+    font-size: 14px;
+    padding: 13px 4px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+  <div class="card">
+
+    <div class="header">
+      <div class="brand">Data Reward</div>
+      <h1>Check Your Data Eligibility</h1>
+      <p>Select an option below to continue.</p>
+    </div>
+
+    <div class="content">
+
+      <div class="notice">
+        <div class="notice-icon">✓</div>
+        <div>
+          Choose your preferred data amount and continue
+          to the next step.
+        </div>
+      </div>
+
+      <p class="section-title">Select your data option</p>
+
+      <div class="options" id="options">
+
+        <div class="option" data-value="1500">
+          1.5GB
+          <small>Data option</small>
+        </div>
+
+        <div class="option" data-value="4500">
+          4.5GB
+          <small>Data option</small>
+        </div>
+
+        <div class="option" data-value="6000">
+          6GB
+          <small>Data option</small>
+        </div>
+
+      </div>
+
+      <button class="cta" id="continueBtn" disabled>
+        SELECT AN OPTION
+      </button>
+
+      <div class="steps">
+
+        <div class="steps-title">
+          What happens next?
+        </div>
+
+        <div class="step">
+          <div class="step-number">1</div>
+          <div>Select a data option above.</div>
+        </div>
+
+        <div class="step">
+          <div class="step-number">2</div>
+          <div>Continue to the next page.</div>
+        </div>
+
+        <div class="step">
+          <div class="step-number">3</div>
+          <div>Follow the instructions shown there.</div>
+        </div>
+
+      </div>
+
+      <p class="disclaimer">
+        Availability and eligibility depend on the offer terms
+        displayed on the next page. This page does not guarantee
+        that a reward will be issued.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="footer">
+    Offer information may vary by user and location.
+  </div>
+
+</div>
+
+<!-- Loading -->
+<div class="loading" id="loading">
+
+  <div class="spinner"></div>
+
+  <strong>Preparing your next step...</strong>
+
+  <p>Please wait.</p>
+
+</div>
+
+<script>
+
+/* =========================================================
+   CPA DESTINATION
+   Replace only the URL below with your CPA offer link.
+   ========================================================= */
+
+const CPA_LINK = "YOUR_CPA_LINK_HERE";
+
+
+/* =========================================================
+   ELEMENTS
+   ========================================================= */
+
+const options = document.querySelectorAll(".option");
+const continueBtn = document.getElementById("continueBtn");
+const loading = document.getElementById("loading");
+
+let selectedAmount = "";
+
+
+/* =========================================================
+   OPTION SELECTION
+   ========================================================= */
+
+options.forEach(option => {
+
+  option.addEventListener("click", function() {
+
+    options.forEach(item => {
+      item.classList.remove("selected");
+    });
+
+    this.classList.add("selected");
+
+    selectedAmount = this.dataset.value;
+
+    continueBtn.disabled = false;
+    continueBtn.textContent = "CONTINUE";
+
+    if (typeof fbq === "function") {
+      fbq("track", "ViewContent", {
+        content_name: "Data Option Selected",
+        content_ids: [selectedAmount]
+      });
+    }
+
+  });
+
+});
+
+
+/* =========================================================
+   CONTINUE BUTTON
+   ========================================================= */
+
+continueBtn.addEventListener("click", function() {
+
+  if (!selectedAmount) return;
+
+  if (typeof fbq === "function") {
+    fbq("track", "Lead", {
+      content_name: "Eligibility CTA",
+      content_ids: [selectedAmount]
+    });
+  }
+
+  loading.style.display = "flex";
+
+  /*
+   * Preserve campaign parameters such as:
+   * fbclid
+   * utm_source
+   * utm_medium
+   * utm_campaign
+   * utm_content
+   * utm_term
+   */
+
+  try {
+
+    const destination = new URL(CPA_LINK);
+
+    const currentParams =
+      new URLSearchParams(window.location.search);
+
+    currentParams.forEach((value, key) => {
+      destination.searchParams.set(key, value);
+    });
+
+    /* Pass selected option to the CPA page */
+    destination.searchParams.set("amount", selectedAmount);
+
+    window.location.href = destination.toString();
+
+  } catch (error) {
+
+    /* Fallback if the CPA URL has not been configured */
+    console.error("Invalid CPA_LINK:", error);
+
+    loading.style.display = "none";
+
+    alert("The offer link is currently unavailable.");
+
+  }
+
+});
+
+</script>
+
+</body>
+</html>
