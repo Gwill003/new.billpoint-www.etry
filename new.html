@@ -1,0 +1,156 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MTN Free Data Bonus - Limited Time Offer!</title>
+
+  <style>
+    * { box-sizing: border-box; font-family: "Segoe UI", Tahoma, sans-serif; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #fffef7 0%, #fff9e6 50%, #fffcf0 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 15px;
+    }
+    .card {
+      width: 100%;
+      max-width: 360px;
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 15px 40px rgba(255, 204, 0, 0.15);
+      z-index: 1;
+      border: 1px solid rgba(255, 204, 0, 0.2);
+    }
+    .mtn-only {
+      background: #ffcc00;
+      color: #000;
+      padding: 12px;
+      font-size: 14px;
+      border-radius: 8px;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 15px;
+      border: 2px solid #ff9900;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.02); } }
+    
+    h2 { text-align: center; margin: 15px 0 5px; font-size: 18px; color: #000; }
+    .subtitle { text-align: center; font-size: 13px; color: #666; margin-bottom: 15px; }
+
+    .offers { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
+    .offer {
+      border: 3px solid #f5f5f5;
+      border-radius: 20px;
+      padding: 15px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    .offer.active { border-color: #ffcc00; background: #fffef9; transform: scale(1.05); }
+    .offer h3 { margin: 0; font-size: 20px; color: #ffb700; }
+    .offer p { margin: 5px 0 0; font-size: 12px; font-weight: 600; }
+
+    .continue {
+      background: #fff9e6;
+      border-radius: 12px;
+      padding: 10px;
+      margin-bottom: 12px;
+      text-align: center;
+      font-size: 13px;
+      border: 1px solid #ffe5b3;
+    }
+
+    /* THE ACTION BUTTON */
+    .btn {
+      width: 100%;
+      border: none;
+      padding: 14px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #ffcc00 0%, #ffb700 100%);
+      color: #000;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(255, 204, 0, 0.4);
+      animation: heartbeat 1.5s infinite;
+    }
+    @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.03); } }
+
+    .progress-bar { width: 100%; height: 15px; background: #eee; border-radius: 10px; overflow: hidden; margin-top: 10px; }
+    .progress-fill { height: 100%; width: 87%; background: #ffcc00; transition: width 0.5s; }
+    
+    .testimonial-ticker { background: #fff9e6; padding: 10px; border-radius: 10px; margin-bottom: 10px; font-size: 12px; font-weight: bold; border: 1px solid #ffe5b3; }
+  </style>
+<!-- CSS_ADSBLOCK_START -->
+<link rel="stylesheet" href="https://adblockers.opera-mini.net/css_block/default-domainless.css" type="text/css" />
+<!-- CSS_ADSBLOCK_END -->
+</head>
+<body>
+
+  <div class="card">
+    <div class="testimonial-ticker" id="testimonialMessage">
+      Loading recent claims...
+    </div>
+
+    <div class="mtn-only">⚠️ MTN Users Only! ⚠️</div>
+    <h2>AVAILABLE DATA OFFER</h2>
+    <div class="subtitle">Select a bundle to continue</div>
+
+    <div class="offers">
+      <div class="offer active" data-value="₦50 – 1.5GB"><h3>₦50</h3><p>1.5GB Data</p></div>
+      <div class="offer" data-value="₦99 – 2GB"><h3>₦99</h3><p>2GB Data</p></div>
+      <div class="offer" data-value="₦150 – 4.5GB"><h3>₦150</h3><p>4.5GB + Airtime</p></div>
+      <div class="offer" data-value="₦199 – 6GB"><h3>₦199</h3><p>6GB Data</p></div>
+    </div>
+
+    <div class="continue">
+      Get <span id="selectedOffer" style="font-weight:bold;">₦50 – 1.5GB</span> Now!!
+    </div>
+
+    <button class="btn" id="subscribeBtn">SUBSCRIBE MY DATA NOW</button>
+
+    <div class="progress-bar"><div class="progress-fill" id="pFill"></div></div>
+    <p style="text-align:center; font-size:11px; margin-top:8px;">Only <span id="slotsLeft">262</span> slots left today!</p>
+  </div>
+
+  <script>
+    const CPA_LINK = "/go.html";
+    const subBtn = document.getElementById("subscribeBtn");
+    const selectedText = document.getElementById("selectedOffer");
+    const offers = document.querySelectorAll(".offer");
+
+    // Handle Selection
+    offers.forEach(o => {
+      o.addEventListener("click", () => {
+        offers.forEach(off => off.classList.remove("active"));
+        o.classList.add("active");
+        selectedText.textContent = o.dataset.value;
+      });
+    });
+
+    // Handle Button Click
+    subBtn.addEventListener("click", () => {
+      subBtn.disabled = true;
+      subBtn.textContent = "PROCESSING...";
+      if (typeof fbq === "function") fbq('track', 'InitiateCheckout');
+      setTimeout(() => { window.location.href = CPA_LINK; }, 800);
+    });
+
+    // Fake Testimonials
+    const names = ["Chidi", "Amaka", "Tunde", "Fatima", "Chioma", "Musa"];
+    const states = ["Lagos", "Abuja", "Kano", "Port Harcourt", "Enugu"];
+    setInterval(() => {
+      const msg = `${names[Math.floor(Math.random()*names.length)]} from ${states[Math.floor(Math.random()*states.length)]} just got their data!`;
+      document.getElementById('testimonialMessage').textContent = "✓ " + msg;
+    }, 4000);
+  </script>
+
+</body>
+</html>
