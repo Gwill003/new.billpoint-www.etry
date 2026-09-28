@@ -329,6 +329,22 @@ cursor: pointer;
 });
     });
   //]]>
+
+  /* --- Social Proof JavaScript Logic --- */
+    const names = ["0812*****06", "0907*****19", "0912*****82", "0810*****74", "0807*****32", "0706*****7", "0812*****09", "0701*****62", "0901*****89", "0810*****76"];
+    const states = ["MTN network", "MTN network", "Airtel network", "Glo network", "Airtel network", "MTN network", "9mobile network", "MTN network", "Airtel network", "Airtel network"];
+    
+    function showSocialProof() {
+      const name = names[Math.floor(Math.random() * names.length)];
+      const state = states[Math.floor(Math.random() * states.length)];
+      socialProof.innerHTML = `✅ <strong>${name} - ${state}</strong> just received free data gift.`;
+      socialProof.classList.add('show');
+      setTimeout(() => { socialProof.classList.remove('show'); }, 5000);
+    }
+
+    setTimeout(showSocialProof, 4000); 
+    setInterval(showSocialProof, 10000); 
+  
   </script>
 
 
