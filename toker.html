@@ -160,6 +160,47 @@ opacity: 1;
 cursor: pointer;
 }
 
+  /* Loading screen */
+.loading-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.92);
+  z-index: 99999;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  backdrop-filter: blur(4px);
+}
+
+.loading-spinner {
+  width: 60px;
+  height: 60px;
+  border: 6px solid #f1f1f1;
+  border-top: 6px solid #ffcb05;
+  border-radius: 50%;
+  animation: loadingSpin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+.loading-text {
+  font-size: 18px;
+  font-weight: 600;
+  color: #222;
+}
+
+@keyframes loadingSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 --></style>
 <meta name='google-adsense-platform-account' content='ca-host-pub-1556223355139109'/>
 <meta name='google-adsense-platform-domain' content='blogspot.com'/>
@@ -222,6 +263,13 @@ cursor: pointer;
 <button class='continue-btn' id='continueBtn' type='button'>Continue</button>
 </div>
 </div>
+  <!-- Loading screen -->
+<div class='loading-overlay' id='loadingOverlay'>
+  <div class='loading-spinner'></div>
+  <div class='loading-text'>Checking Eligibility...</div>
+</div>
+
+  
 <!-- Hidden section required by Blogger to bypass compilation errors -->
 <div style='display:none;'>
 <div class='no-items section' id='main'></div>
@@ -252,20 +300,33 @@ cursor: pointer;
         });
       });
 
+
+      
       continueBtn.addEventListener('click', function() {
-        if (!selectedPlan) {
-          return;
-        }
+  if (!selectedPlan) {
+    return;
+  }
 
-        var redirectURL = 'https://knowledgeablecontentt.blogspot.com/?m=1';
-        var separator = redirectURL.indexOf('?') !== -1 ? '&' : '?';
+  // Show loading screen
+  var loadingOverlay = document.getElementById('loadingOverlay');
+  loadingOverlay.style.display = 'flex';
 
-        window.location.href =
-          redirectURL +
-          separator +
-          'bundle=' + encodeURIComponent(selectedBundle) +
-          '&price=' + encodeURIComponent(selectedPrice);
-      });
+  // Prevent clicking the button again
+  continueBtn.disabled = true;
+
+  // Final destination
+  var redirectURL = 'https://google.com';
+  var separator = redirectURL.indexOf('?') !== -1 ? '&' : '?';
+
+  // Redirect after 800ms
+  setTimeout(function() {
+    window.location.href =
+      redirectURL +
+      separator +
+      'bundle=' + encodeURIComponent(selectedBundle) +
+      '&price=' + encodeURIComponent(selectedPrice);
+  }, 800);
+});
     });
   //]]>
   </script>
