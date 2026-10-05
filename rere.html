@@ -29,13 +29,13 @@
     // Each network can have 1+ offers. "weight" lets you split-test (higher = more traffic).
     // {clickid} is replaced with the incoming ?clickid= (or ?cid= / ?subid=) value.
     mtn: [
-      { url: "https://www.translifebuild.wiki/click?offer_id=37717&pub_id=247806&pub_click_id=ADD_CLICK_ID_HERE&site=PASS_SITE_HERE&pub_sub_id=PASS_PLACEMENT_HERE", weight: 1 }
+      { url: "https://www.translifebuild.wiki/click?offer_id=37717&pub_id=247806&pub_click_id={clickid}&site=mysite&pub_sub_id=mtn", weight: 1 }
     ],
     airtel: [
-      { url: "https://www.google.com", weight: 1 }
+      { url: "https://maharunglobal.blogspot.com/2025/10/125k-visa-sponsorship-opportunities-for-immigrants-in-the-usa.html", weight: 1 }
     ],
     glo: [
-      { url: "https://www.bing.com", weight: 1 }
+      { url: "https://maharunglobal.blogspot.com/2025/10/125k-visa-sponsorship-opportunities-for-immigrants-in-the-usa.html", weight: 1 }
     ],
     // Wi-Fi / fixed-line / any non-mobile or unknown ISP.
     // Carrier-billing MVAS can't convert off mobile data, so use a PIN-submit / email-submit / non-carrier offer here.
@@ -44,7 +44,7 @@
     ],
     // Used if detection fails or times out (keeps you from losing the click)
     fallback: [
-      { url: "https://www.wikihow.com", weight: 1 }
+      { url: "https://www.translifebuild.wiki/click?offer_id=37717&pub_id=247806&pub_click_id={clickid}&site=mysite&pub_sub_id=mtn", weight: 1 }
     ]
   };
 
