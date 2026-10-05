@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Loading…</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<!-- Warm up connections to the IP lookup providers so detection is faster -->
+<link rel="preconnect" href="https://ipwho.is">
+<link rel="preconnect" href="https://ipapi.co">
+<style>
+  html,body{margin:0;height:100%;background:#fff;font-family:system-ui,sans-serif}
+  .w{display:flex;height:100%;align-items:center;justify-content:center;flex-direction:column;color:#555;font-size:14px}
+  .s{width:28px;height:28px;border:3px solid #ddd;border-top-color:#333;border-radius:50%;animation:r .7s linear infinite;margin-bottom:10px}
+  @keyframes r{to{transform:rotate(360deg)}}
+  pre{white-space:pre-wrap;padding:16px;font-size:13px}
+</style>
+</head>
+<body>
+<div class="w" id="w"><div class="s"></div>Please wait…</div>
+<noscript><meta http-equiv="refresh" content="0;url=https://YOUR-DEFAULT-OFFER-LINK.com/?clickid="></noscript>
+
+<script>
+(function () {
+  /* =====================  CONFIG — EDIT THIS PART  ===================== */
+
+  var OFFERS = {
+    // Each network can have 1+ offers. "weight" lets you split-test (higher = more traffic).
+    // {clickid} is replaced with the incoming ?clickid= (or ?cid= / ?subid=) value.
+    mtn: [
+      { url: "https://YOUR-MTN-OFFER.com/?aff_sub={clickid}", weight: 1 }
+    ],
+    airtel: [
+      { url: "https://YOUR-AIRTEL-OFFER.com/?aff_sub={clickid}", weight: 1 }
+    ],
+    glo: [
+      { url: "https://YOUR-GLO-OFFER.com/?aff_sub={clickid}", weight: 1 }
+    ],
+    // Wi-Fi / fixed-line / any non-mobile or unknown ISP.
+    // Carrier-billing MVAS can't convert off mobile data, so use a PIN-submit / email-submit / non-carrier offer here.
+    wifi: [
+      { url: "https://YOUR-WIFI-OFFER.com/?aff_sub={clickid}", weight: 1 }
+    ],
+    // Used if detection fails or times out (keeps you from losing the click)
+    fallback: [
+      { url: "https://YOUR-DEFAULT-OFFER.com/?aff_sub={clickid}", weight: 1 }
+    ]
+  };
+
+  // Mobile network detection by ASN (primary) + ISP/org name (backup).
+  // Verify ASNs against your own traffic logs using ?debug=1 — carriers can have several.
+  var NETWORKS = [
+    { key: "mtn",    asn: [29465], name: /\bmtn\b/i },
+    { key: "airtel", asn: [36873], name: /airtel|bharti|celtel/i },
+    { key: "glo",    asn: [37148], name: /globacom|\bglo\b/i }
+  ];
+
+  var TIMEOUT_MS   = 1500;   // max time to wait for detection before using fallback
+  var CACHE_MIN    = 10;     // remember detection result this many minutes (0 = off)
+  var PASS_PARAMS  = true;   // forward all incoming query params to the offer URL
+
+  /* ===================  END CONFIG — NO NEED TO EDIT  =================== */
+
+  var qs = new URLSearchParams(location.search);
+  var debug = qs.get("debug") === "1";
+
+  function pick(list) {
+    var total = 0, i;
+    for (i = 0; i < list.length; i++) total += list[i].weight || 1;
+    var r = Math.random() * total;
+    for (i = 0; i < list.length; i++) {
+      r -= list[i].weight || 1;
+      if (r <= 0) return list[i];
+    }
+    return list[0];
+  }
+
+  function build(network) {
+    var offer = pick(OFFERS[network] || OFFERS.fallback);
+    var cid = qs.get("clickid") || qs.get("cid") || qs.get("subid") || "";
+    var url = offer.url.replace(/\{clickid\}/g, encodeURIComponent(cid));
+    if (PASS_PARAMS) {
+      var u = new URL(url);
+      qs.forEach(function (v, k) {
+        if (k === "debug" || k === "net") return;
+        if (!u.searchParams.has(k)) u.searchParams.set(k, v);
+      });
+      url = u.toString();
+    }
+    return url;
+  }
+
+  var done = false;
+  function go(network, info) {
+    if (done) return;
+    done = true;
+    try {
+      if (CACHE_MIN > 0 && network !== "fallback")
+        localStorage.setItem("net_cache", JSON.stringify({ n: network, t: Date.now() }));
+    } catch (e) {}
+    var url = build(network);
+    if (debug) {
+      document.getElementById("w").outerHTML =
+        "<pre>Network: " + network + "\nInfo: " + JSON.stringify(info || {}, null, 2) + "\nWould redirect to:\n" + url + "</pre>";
+      return;
+    }
+    location.replace(url);   // replace() keeps the redirector out of the back-button history
+  }
+
+  function classify(asn, org) {
+    asn = parseInt(String(asn).replace(/\D/g, ""), 10);
+    for (var i = 0; i < NETWORKS.length; i++) {
+      var n = NETWORKS[i];
+      if (n.asn.indexOf(asn) !== -1 || (org && n.name.test(org))) return n.key;
+    }
+    return "wifi";   // anything that isn't a known mobile network
+  }
+
+  // 1) Manual override for testing: ?net=mtn|airtel|glo|wifi
+  var forced = qs.get("net");
+  if (forced && OFFERS[forced]) return go(forced, { forced: true });
+
+  // 2) Cached result from a recent visit = instant redirect
+  try {
+    if (CACHE_MIN > 0 && !debug) {
+      var c = JSON.parse(localStorage.getItem("net_cache") || "null");
+      if (c && OFFERS[c.n] && Date.now() - c.t < CACHE_MIN * 60000) return go(c.n, { cached: true });
+    }
+  } catch (e) {}
+
+  // 3) Hard timeout so a slow lookup never costs you the click
+  var timer = setTimeout(function () { go("fallback", { reason: "timeout" }); }, TIMEOUT_MS);
+
+  // 4) Race two providers — first valid answer wins
+  var ctl = new AbortController();
+  function lookup(url, parse) {
+    return fetch(url, { signal: ctl.signal, cache: "no-store" })
+      .then(function (r) { if (!r.ok) throw 0; return r.json(); })
+      .then(parse);
+  }
+  var p1 = lookup("https://ipwho.is/?fields=success,ip,connection", function (d) {
+    if (!d.success || !d.connection) throw 0;
+    return { asn: d.connection.asn, org: (d.connection.isp || "") + " " + (d.connection.org || ""), ip: d.ip, src: "ipwho.is" };
+  });
+  var p2 = lookup("https://ipapi.co/json/", function (d) {
+    if (!d.asn) throw 0;
+    return { asn: d.asn, org: d.org || "", ip: d.ip, src: "ipapi.co" };
+  });
+
+  function any(ps) {   // Promise.any fallback for older browsers
+    return new Promise(function (res, rej) {
+      var fails = 0;
+      ps.forEach(function (p) {
+        p.then(res, function () { if (++fails === ps.length) rej(); });
+      });
+    });
+  }
+
+  any([p1, p2]).then(function (d) {
+    clearTimeout(timer);
+    ctl.abort();
+    go(classify(d.asn, d.org), d);
+  }, function () {
+    clearTimeout(timer);
+    go("fallback", { reason: "lookup failed" });
+  });
+})();
+</script>
+</body>
+</html>
