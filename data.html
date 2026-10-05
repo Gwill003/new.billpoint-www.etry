@@ -448,5 +448,94 @@ src="https://www.facebook.com/tr?id=1050135394099638&ev=PageView&noscript=1"
   <script>
 	var sp_is_mobile = true;	
 </script>
+
+
+
+
+	 <!-- ======== MTN LINK SWAP: paste before </body>. Your existing CPA links stay untouched ======== -->
+<script>
+(function () {
+  // ----------------------------- CONFIG -----------------------------
+  var CONFIG = {
+    // Which links are your CPA links? Any <a> whose href contains this text.
+    // Use part of your offer's domain, e.g. "cpa-network.com" or "clk.example.com"
+    offerLinkContains: "https://google.com",
+
+    // OR target specific elements instead (leave "" to use the rule above), e.g. "#cta-button, .claim-btn"
+    offerSelector: "",
+
+    // What non-MTN visitors get:
+    //   "link"    -> their link is swapped to fallbackUrl
+    //   "message" -> the button is replaced by notMtnMessage
+    //   "hide"    -> the button is hidden
+    action: "link",
+    fallbackUrl: "https://bing.com",
+    notMtnMessage: "This offer is only available to MTN Nigeria users on mobile data.",
+
+    ipinfoToken: "",          // optional free token from ipinfo.io
+    mtnAsns: [29465],         // VERIFY at bgp.he.net / ipinfo.io and add any others
+    timeoutMs: 4000
+  };
+  // -------------------------------------------------------------------
+
+  var MTN_NAME = /mtn.*nigeria|nigeria.*mtn/i;
+
+  function isMtn(asn, org) {
+    return CONFIG.mtnAsns.indexOf(parseInt(asn, 10)) !== -1 || MTN_NAME.test(org || "");
+  }
+
+  function fetchJson(url) {
+    var ctrl = new AbortController();
+    var t = setTimeout(function () { ctrl.abort(); }, CONFIG.timeoutMs);
+    return fetch(url, { signal: ctrl.signal }).then(function (r) {
+      clearTimeout(t);
+      if (!r.ok) throw new Error(r.status);
+      return r.json();
+    });
+  }
+
+  function viaIpinfo() {
+    var url = "https://ipinfo.io/json" + (CONFIG.ipinfoToken ? "?token=" + CONFIG.ipinfoToken : "");
+    return fetchJson(url).then(function (d) {
+      var m = /^AS(\d+)\s+(.*)$/.exec(d.org || "");
+      return { asn: m ? m[1] : "", org: m ? m[2] : (d.org || "") };
+    });
+  }
+
+  function viaIpwho() {
+    return fetchJson("https://ipwho.is/").then(function (d) {
+      if (!d.success) throw new Error("fail");
+      var c = d.connection || {};
+      return { asn: c.asn, org: (c.org || "") + " " + (c.isp || "") };
+    });
+  }
+
+  function findOfferElements() {
+    if (CONFIG.offerSelector) return document.querySelectorAll(CONFIG.offerSelector);
+    return document.querySelectorAll('a[href*="' + CONFIG.offerLinkContains + '"]');
+  }
+
+  function applyNotMtn() {
+    findOfferElements().forEach(function (el) {
+      if (CONFIG.action === "link") {
+        el.setAttribute("href", CONFIG.fallbackUrl);
+      } else if (CONFIG.action === "hide") {
+        el.style.display = "none";
+      } else {
+        var p = document.createElement("p");
+        p.textContent = CONFIG.notMtnMessage;
+        el.parentNode.replaceChild(p, el);
+      }
+    });
+  }
+
+  // Only act when we POSITIVELY detect a non-MTN network.
+  // If the lookup fails, the original CPA link stays exactly as it was.
+  viaIpinfo().catch(viaIpwho)
+    .then(function (r) { if (!isMtn(r.asn, r.org)) applyNotMtn(); })
+    .catch(function () { /* lookup failed: leave the page unchanged */ });
+})();
+</script>
+<!-- ============================== END MTN LINK SWAP ============================== -->
  </body>
 </html>
